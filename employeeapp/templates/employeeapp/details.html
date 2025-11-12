@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Details</title>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <style>
+    body {
+      background: linear-gradient(to right, #e0c3fc, #8ec5fc);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+    }
+
+    .card {
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      background-color: white;
+      max-width: 600px;
+      width: 100%;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .card h1 {
+      color: #6a1b9a;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .card h4 {
+      margin-bottom: 15px;
+    }
+
+    .btn-group {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-lg {
+      margin: 10px;
+      min-width: 150px;
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(106, 27, 154, 0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card text-center animate__animated animate__fadeInUp">
+
+    <!-- Profile Image with fallback -->
+    {% if obj.photo %}
+      <img src="{{ obj.photo.url }}/" alt="Employee Image"  class="profile-img">
+    {% else %}
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Default Image" class="profile-img">
+    {% endif %}
+
+    <h1>Employee: {{ obj.name }}</h1>
+
+    <h4><strong>Gender:</strong> {{ obj.gender }}</h4>
+    <h4><strong>Mobile Number:</strong> {{ obj.mob_num }}</h4>
+    <h4><strong>Email:</strong> {{ obj.email }}</h4>
+    <h4><strong>Address:</strong> {{ obj.address }}</h4>
+    <h4><strong>Salary:</strong> ₹{{ obj.salary }}</h4>
+    <h4><strong>Designation:</strong> {{ obj.designation }}</h4>
+
+    <div class="btn-group">
+      <a href="/forms/list/" class="btn btn-secondary btn-lg">⬅ Back to List</a>
+      <a href="/forms/update/{{ obj.id }}" class="btn btn-warning btn-lg">✏️ Update</a>
+      <a href="/forms/delete/{{ obj.id }}" class="btn btn-danger btn-lg">🗑️ Delete</a>
+    </div>
+  </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Details Employee Page </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container" style="text-align: center;">
+
+        <h1 style="text-align: center; color: turquoise;"> HERE YOU WILL SEE THE DETAILS OF EMPLOYEE "{{obj.name}}"....! </h1><br><hr><br>
+
+        <h4> Employee Name is           : {{obj.name}} </h4>
+        <h4> Employee Gender is         : {{obj.gender}} </h4>
+        <h4> Employee Mobile Number is  : {{obj.mob_num}} </h4>
+        <h4> Employee Email is          : {{obj.email}} </h4>
+        <h4> Employee Address is        : {{obj.address}} </h4>
+        <h4> Employee Salary is         : {{obj.salary}} </h4>
+        <h4> Employee Designation is    : {{obj.designation}} </h4>
+
+    </div>
+    <br><hr><br>
+    <div class="container" style="text-align: center;">
+        <a class="btn btn-warning btn-lg" href="/forms/update/{{obj.id}}" role="button"> Update Student </a>
+        <a class="btn btn-danger btn-lg" href="/forms/delete/{{obj.id}}" role="button"> Delete Student </a>
+
+    </div>
+</body>
+</html> -->

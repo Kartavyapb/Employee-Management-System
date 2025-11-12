@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url("{% static 'images/employee-network.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      color: green;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+    }
+
+    .home-box {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px 60px;
+      border-radius: 15px;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .home-box h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #00ff88;
+    }
+
+    .btn-transparent {
+      background-color: transparent;
+      color: #00ffcc;
+      border: 2px solid #00ffcc;
+      padding: 10px 25px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-transparent:hover {
+      background-color: #00ffcc;
+      color: black;
+      text-decoration: none;
+    }
+
+    hr {
+      border-top: 1px solid #00ffcc;
+    }
+
+    /* Floating emojis */
+    .emoji {
+      position: absolute;
+      font-size: 2rem;
+      animation: floatEmoji 10s infinite linear;
+      opacity: 0.8;
+    }
+
+    @keyframes floatEmoji {
+      0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(20px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Emojis -->
+  <div class="emoji" style="left: 10%;">💼</div>
+  <div class="emoji" style="left: 30%; animation-delay: 2s;">🧑‍💼</div>
+  <div class="emoji" style="left: 50%; animation-delay: 4s;">📋</div>
+  <div class="emoji" style="left: 70%; animation-delay: 6s;">👨‍💻</div>
+  <div class="emoji" style="left: 90%; animation-delay: 1s;">🗂️</div>
+
+  <div class="home-box">
+    <h1>👨‍💼 Employee Management System 💼</h1><br><hr>
+    <a class="btn btn-transparent" href="/forms/add">Add New Employee +</a><br><hr>
+    <a class="btn btn-transparent" href="/forms/list">List of Employees</a>
+  </div>
+</body>
+</html>

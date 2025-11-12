@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Update Employee</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <style>
+    body {
+      background: linear-gradient(to right, #141e30, #243b55); /* Dark gradient background */
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      color: #f1f1f1;
+    }
+
+    .card {
+      background-color: rgba(0, 0, 0, 0.88);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      width: 100%;
+      max-width: 600px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+      color: #00ffcc;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      color: #ccc;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      background-color: #2a2a2a;
+      border: 1px solid #555;
+      color: #fff;
+    }
+
+    .form-control::placeholder {
+      color: #aaa;
+    }
+
+    .btn-success {
+      border-radius: 10px;
+      padding: 10px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #00e676;
+      border: none;
+      transition: all 0.3s ease-in-out;
+      color: black;
+    }
+
+    .btn-success:hover {
+      background-color: #00c853;
+      color: white;
+    }
+
+    hr {
+      border-top: 1px solid #444;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card animate__animated animate__fadeInUp">
+    <h2 class="text-center">✏️ Update Employee Information</h2>
+    <hr />
+
+    <form id="updateForm" action="" method="POST" enctype="multipart/form-data" onsubmit="return playSound(event)">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label>Name:</label>
+        <input type="text" class="form-control" name="ename" value="{{ obj.name }}" required>
+      </div>
+
+      <div class="form-group">
+        <label>Gender:</label>
+        <input type="text" class="form-control" name="egender" value="{{ obj.gender }}" required>
+      </div>
+
+      <div class="form-group">
+        <label>Mobile Number:</label>
+        <input type="text" class="form-control" name="emobnum" maxlength="10" pattern="\d{10}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" class="form-control" name="email" value="{{ obj.email }}" required>
+      </div>
+
+      <div class="form-group">
+        <label>Address:</label>
+        <input type="text" class="form-control" name="eaddress" value="{{ obj.address }}" required>
+      </div>
+
+      <div class="form-group">
+        <label>Salary (₹):</label>
+        <input type="number" class="form-control" name="esalary" value="{{ obj.salary }}" required>
+      </div>
+
+      <div class="form-group">
+        <label>Designation:</label>
+        <input type="text" class="form-control" name="edesign" value="{{ obj.designation }}" required>
+      </div>
+
+      <div class="form-group">
+          <label>Update Profile Photo:</label>
+          <input type="file" class="form-control" name="photo" accept="image/*">
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-success">✔️ Update</button>
+      </div>
+    </form>
+
+    <audio id="updateSound">
+      <source src="{% static 'sounds/Update audio.mp3' %}" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+
+    <script>
+      function playSound(event) {
+        event.preventDefault();
+        var audio = document.getElementById("updateSound");
+        var form = document.getElementById("updateForm");
+
+        audio.play();
+
+        audio.onended = function () {
+          form.submit();
+        };
+
+        setTimeout(function () {
+          form.submit();
+        }, 2500);
+
+        return false;
+      }
+    </script>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Employee Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <h2 style="text-align: center; color: green;"> Here you can Update Employee Information : </h2><br><hr><br>
+
+    <div class="container" style="text-align: center;">
+
+        <form action="" method="POST">{% csrf_token %}
+
+            Name           : <input type="text" name = 'ename' value="{{obj.name}}"><br><br>
+            Gender         : <input type="text" name = 'egender' value="{{obj.gender}}"><br><br>
+            Mob Num        : <input type="text" name = 'emobnum' value="{{obj.mob_num}}"><br><br>
+            Email          : <input type="text" name = 'email' value="{{obj.email}}"><br><br>
+            Address        : <input type="text" name = 'eaddress' value="{{obj.address}}"><br><br>
+            Salary         : <input type="text" name = 'esalary' value="{{obj.salary}}"><br><br>
+            Designation    : <input type="text" name = 'edesign' value="{{obj.designation}}"><br><br>
+            <hr><br>
+
+            <button type="submit" class="btn btn-success"> Update </button>
+
+
+        </form>
+    </div>
+
+
+</body>
+</html> -->

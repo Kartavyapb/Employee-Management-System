@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Employee</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #121212;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      max-width: 700px;
+      background: #1e1e1e;
+      padding: 50px;
+      margin: 100px auto;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
+      text-align: center;
+    }
+
+    h2 {
+      color: #ff6b81;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+
+    hr {
+      border-top: 2px solid #ff6b81;
+      width: 50%;
+      margin: 20px auto;
+    }
+
+    .btn-danger {
+      background: #e53935;
+      border: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 0 10px rgba(229, 57, 53, 0.5);
+    }
+
+    .btn-danger:hover {
+      background: #ff1744;
+      box-shadow: 0 0 20px rgba(255, 23, 68, 0.7);
+    }
+
+    .btn-primary {
+      background: #3949ab;
+      border: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 0 10px rgba(57, 73, 171, 0.5);
+    }
+
+    .btn-primary:hover {
+      background: #536dfe;
+      box-shadow: 0 0 20px rgba(83, 109, 254, 0.7);
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Are you sure you want to delete <br><strong>"{{ obj.name }}"</strong>?</h2>
+    <hr>
+    <form id="deleteForm" action="" method="POST" onsubmit="return playSound(event)">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">YES, I'm Sure</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a class="btn btn-primary" href="/forms/list/" role="button">NO, Take me Back..!</a>
+    </form>
+  </div>
+
+  <!-- Audio element -->
+  <audio id="deleteSound">
+    <source src="{% static 'sounds/Delete_audio.mp3' %}" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- JS to play sound on submit -->
+  <script>
+    function playSound(event) {
+      event.preventDefault();
+      var audio = document.getElementById("deleteSound");
+      var form = document.getElementById("deleteForm");
+
+      // Play delete confirmation sound
+      audio.play();
+
+      // Submit after audio ends
+      audio.onended = function () {
+        form.submit();
+      };
+
+      // Fallback in case audio fails
+      setTimeout(function () {
+        form.submit();
+      }, 2500);
+
+      return false;
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Delete Employee Page </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    
+    <div class="container" style="text-align: center;">
+
+        <h2> Are you sure, you want to delete the student "{{obj.name}}" ? </h2>
+        <hr>
+
+        <form action="" method="POST"> {% csrf_token %}
+
+            <button type="submit" class="btn btn-danger"> YES, I'm Sure </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-primary" href="/forms/list/" role="button"> NO, Take me Back..! </a>
+
+        </form>
+    
+    </div>
+
+</body>
+</html>  -->
